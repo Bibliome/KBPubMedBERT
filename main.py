@@ -232,6 +232,11 @@ def main():
     args.n_gpu = torch.cuda.device_count()
     args.device = device
 
+    if not os.path.exists("logging"):
+        os.makedirs("logging")
+    if not os.path.exists("models"):
+        os.makedirs("models")
+
     # Setup logging
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',datefmt='%m/%d/%Y %H:%S',level=logging.INFO,filename=f"logging/training_log_{args.run_id}",filemode='w')
     logger.warning("device: %s, n_gpu: %s",device, args.n_gpu)
