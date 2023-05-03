@@ -8,7 +8,7 @@
 #SBATCH --partition=all
 
 #set -x
-corpus=drugprot
+corpus=chemprot_blurb
 lr=2e-5
 
 if [ "$corpus" = "drugprot" ]; then
