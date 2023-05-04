@@ -2,7 +2,7 @@
 
 Combing RotatE graph embedding with representations from PubMedBERT helps improve RE performance.
 
-To reproduce our experimental results,
+### To reproduce our experimental results
 
 - Download first our data:
 ```
@@ -16,7 +16,7 @@ unzip data.zip
 | PubMedBERT | 5e-5 | | 3e-5 |
 | KB-PubMedBERT (Ours) | 2e-5 | 2e-5 | 2e-5 |
 
-Set different learning rates for different corpus in slurm files.
+Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on BB-Rel (p).
 
 
  
