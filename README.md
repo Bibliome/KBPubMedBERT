@@ -2,5 +2,7 @@
 
 Combing RotatE graph embedding with representations from PubMedBERT helps improve RE performance.
 
-Download first our data from here:
-https://drive.google.com/drive/folders/1GrzHXzCIF3QyEVDsuWjLQfXCAOu8ywhN?usp=share_link
+Download first our data:
+```
+gdown https://drive.google.com/uc?id=13FCC-n6tK49oBIvJyIB9j2svC7iG9bKc
+```
