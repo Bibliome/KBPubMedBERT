@@ -16,7 +16,7 @@ Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE
 
 - Optimal learning rate for each corpus
 
-| | BB-Rel$_{p}$ | ChemProt (Blurb) | DrugProt |
+| | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
 | --- | --- | --- | --- |
 | PubMedBERT | 5e-5 | | 3e-5 |
 | KB-PubMedBERT (Ours) | 2e-5 | 2e-5 | 2e-5 |
