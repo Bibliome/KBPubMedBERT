@@ -7,8 +7,6 @@ import random
 import numpy as np
 import pandas as pd
 import torch
-#from torch.utils.data import (RandomSampler, SequentialSampler, WeightedRandomSampler)
-#import torchcontrib
 from torch.optim import Adam, AdamW
 from transformers import (BertConfig, BertTokenizer, get_linear_schedule_with_warmup)
 from bert_model import BertForSequenceClassification
@@ -40,14 +38,12 @@ def evaluate(dataloader,model,num_labels,eval=False,predict_only=False):
             else:
                 loss, logits = model(**batch)[:2]
             preds = logits.detach().cpu().numpy()
-            #print(preds.shape)
             if not predict_only:
                eval_loss += loss.item()
                nb_eval_steps += 1
                preds = one_hot(np.argmax(preds,axis=1),num_labels)
                full_golds.append(batch["labels"].detach().cpu().numpy())
             else:
-               #print(preds)
                preds = np.argmax(preds,axis=1)
             full_preds.append(preds)
     full_preds = np.concatenate(full_preds)
@@ -58,8 +54,6 @@ def evaluate(dataloader,model,num_labels,eval=False,predict_only=False):
     if predict_only or eval:
         return full_preds
     else:
-        #print(full_golds)
-        #print(full_preds)
         return eval_loss, f1_score(full_golds,full_preds,average="micro",labels=list(range(1,num_labels)))
         
 def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
@@ -72,31 +66,6 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
 
     n_params = sum([p.nelement() for p in model.parameters()])
     print(f'* number of parameters: {n_params}')
-    
-    """for n, p in model.named_parameters():
-        if p.requires_grad:
-            logger.info(n)"""
-    
-    #print(f"{len(train_dataloader)},{args.train_batch_size}")
-
-    """if args.mode in ["with_kb","with_fine_rels","only_kb"]:
-        if args.extra_learning_rate == -1:
-            optimizer = AdamW(model.parameters(),lr=args.learning_rate)
-        else:
-            emb_params = list(filter(lambda k:k[0] in embedding_weight_list,model.named_parameters()))
-            #logger.info(emb_params)
-            other_params = list(filter(lambda k:k[0] not in embedding_weight_list,model.named_parameters()))
-            emb_params = [p[1] for p in emb_params]
-            other_params = [p[1] for p in other_params]
-            optimizer = AdamW([{'params':other_params},
-                            {'params':emb_params, 'lr':args.extra_learning_rate}],
-                            lr=args.learning_rate)
-        logger.info(f"learning rate: {args.learning_rate},{args.extra_learning_rate}")
-        #logger.info(len(emb_params))
-        #logger.info(len(other_params))
-    else:
-        optimizer = AdamW(model.parameters(),lr=args.learning_rate)
-        logger.info(f"learning rate: {args.learning_rate}")"""
 
     optimizer = AdamW(model.parameters(),lr=args.learning_rate)
     logger.info(f"learning rate: {args.learning_rate}")
@@ -114,17 +83,12 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
     logger.info("  Num examples = %d", len(train_dataloader))
     logger.info("  Num Epochs = %d", NUM_EPOCHS)
     logger.info("  Instantaneous batch size = %d", args.batch_size)
-    #if args.gradient_accumulation:
-    #    logger.info("  Gradient Accumulation steps = %d", args.gradient_accumulation_steps)
-    #logger.info("  Total optimization steps = %d", t_total)
 
     global_step = 0
     logging_loss, min_loss, prev_dev_loss = 0.0, np.inf, np.inf
     max_score, prev_dev_score = -np.inf, -np.inf
     training_hist = []
     model.zero_grad()
-    #train_iterator = trange(int(NUM_EPOCHS),desc="Epoch")
-    #set_seed(args)  # Added here for reproducibility (even between python 2 and 3)
 
     dev_loss_record = []
     dev_score_record = []
@@ -133,7 +97,7 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
         tr_loss = 0.0
         logging_loss = 0.0
         grad_norm = 0.0
-        #epoch_iterator = tqdm(train_dataloader,desc="Iteration")
+        
         for step, batch in enumerate(train_dataloader): 
             model.train()
             loss = model(**batch)[0] 
@@ -154,7 +118,6 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
             if args.logging_steps > 0 and (step + 1) % args.logging_steps == 0:
                 # Log metrics
                 logger.info(f"training loss = {(tr_loss - logging_loss)/args.logging_steps} | global step = {global_step}")
-                #logger.info(f"current lr = {scheduler.get_lr()[0]}")
                 logging_loss = tr_loss
 
         dev_loss, dev_score = evaluate(dev_dataloader,model,args.num_labels)
@@ -196,7 +159,6 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
                 training_hist.append(False)
                 if len(training_hist) > args.patience and not np.any(training_hist[-args.patience:]):
                     logger.info(f"early stopping triggered: best loss on validation set: {min_loss} at epoch {best_epoch}.")
-                    #train_iterator.close()
                     break
             prev_dev_loss = dev_loss
 
@@ -207,7 +169,6 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
                 training_hist.append(False)
                 if len(training_hist) > args.patience and not np.any(training_hist[-args.patience:]):
                     logger.info(f"early stopping triggered: best F-score on validation set: {max_score} at {best_epoch}.")
-                    #train_iterator.close()
                     break
             prev_dev_score = dev_score
 
@@ -263,17 +224,6 @@ def main():
         entity_embs = np.load(os.path.join(args.emb_dir,"entity_embedding.npy"))
         relation_embs = np.load(os.path.join(args.emb_dir,"relation_embedding.npy"))
     logger.info("embeddings loaded.")
-
-    """if not os.path.exists(os.path.join(output_dir,"dev_preds")):
-        os.makedirs(os.path.join(output_dir,"dev_preds"))
-    if not os.path.exists(os.path.join(output_dir,"test_preds")):
-        os.makedirs(os.path.join(output_dir,"test_preds"))"""
-
-    #print("data loaded.") 
-   
-    #all_preds = []
-    #all_dev_loss, all_dev_score, all_best_epochs = [], [], []
-    # Evaluate the best model on Test se
     logger.info(f"start training...seed:{args.seed}")
     
     # training     
@@ -286,12 +236,9 @@ def main():
                                                           num_labels=args.num_labels,
                                                           mode=args.mode)
     model.to(args.device)
-    #logger.info(f"training model-{nr+1}.")
-    #assert args.mode == "no", "stop here"
 
     checkpoint, _, _, _ = train(args,train_dataloader,dev_dataloader,model)
-        
-    
+       
     model = BertForSequenceClassification.from_pretrained(checkpoint,config=config,
                                                           task_name=args.task_name,
                                                           kb_embs=entity_embs,
@@ -309,26 +256,6 @@ def main():
     with open(os.path.join(output_dir,"test_preds.npy"),"wb") as fp:
         np.save(fp,test_preds)
 
-        """all_preds.append(np.expand_dims(result,0))
-        
-        all_dev_loss = np.array(all_dev_loss)
-        all_dev_score = np.array(all_dev_score)
-        
-        all_preds = np.concatenate(all_preds,axis=0)
-        with open(os.path.join(output_dir,"preds.npy"),"wb") as fp:
-        np.save(fp,all_preds)"""
-        
-        """
-        df_loss_record = pd.DataFrame({**{"members":[f"ensemble_{i}" for i in range(1,args.num_run+1)]},**{f"epoch_{i}":all_dev_loss[:,i] for i in range(args.max_num_epochs)}})
-        df_loss_record.to_csv(os.path.join(output_dir,"training_record_loss.csv"),index=False)
-
-        df_score_record = pd.DataFrame({**{"members":[f"ensemble_{i}" for i in range(1,args.num_run+1)]},**{f"epoch_{i}":all_dev_score[:,i] for i in range(args.max_num_epochs)}})
-        df_score_record.to_csv(os.path.join(output_dir,"training_record_score.csv"),index=False)
-
-        df_best_epochs = pd.DataFrame({"members":[f"ensemble_{i}" for i in range(1,args.num_run+1)],"best_epoch":all_best_epochs})
-        df_best_epochs.to_csv(os.path.join(output_dir,"training_best_epochs.csv"),index=False)
-        
-        print("training record saved.")"""
     print("finished.")
     
 if __name__ == "__main__":
