@@ -39,6 +39,6 @@ $^{\*}$: We use the result on ChemProt (Blurb) reported in the papar of PubMedBE
 All scores of KB-PubMedBERT are significantly better then these of PubMedBERT under a t-test (with $p < 0.05$). $p$-values on each corpus:
 
 | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | 0.046 | 0.008 | 0.021 |
  
