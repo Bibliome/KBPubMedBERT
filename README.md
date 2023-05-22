@@ -9,10 +9,10 @@ Combing RotatE graph embedding with representations from PubMedBERT helps improv
 gdown https://drive.google.com/uc?id=13FCC-n6tK49oBIvJyIB9j2svC7iG9bKc
 unzip data.zip
 ```
-The downloaded data is processed data and can be fed to models directly. It contains graph embeddings of corresponding knowledge bases for the three corpus that we test on. We update KB triplets (source data that we use to calculate graph embeddings) of the three corpus here:
+The downloaded data is processed data and can be fed to models directly. It contains graph embeddings of corresponding knowledge bases for the three corpus that we test on. We upload KB triplets (source data that we use to calculate graph embeddings) of the three corpus here:
 https://drive.google.com/file/d/18_pxwTBCcDA2TqVfpzAOl-a_AFtVuRS0/view?usp=share_link
 
-Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE embedding calculation. We follow exactly their instructions to obtain our graph embeddings.
+Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE embedding calculation. We follow exactly their instructions to calculate our graph embeddings.
 
 - Optimal learning rate for each corpus
 
