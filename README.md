@@ -1,6 +1,6 @@
 # Relation Extraction with RotatE Graph Embeddings
 
-Combing RotatE graph embedding with representations from PubMedBERT helps improve RE performance.
+Combining RotatE graph embedding with representations from PubMedBERT helps improve RE performance.
 
 ### To reproduce our experimental results
 
