@@ -44,8 +44,6 @@ class DataLoader(object):
             data = [data[i] for i in indices]
         
         data = [data[i:i+args.batch_size] for i in range(0,len(data),args.batch_size)]
-        #print(len(embs),len(embs[0]))
-        #print(embs[0])
         self.data = data
         logger.info(f"{tag}: {len(data)} batches generated.")
 
@@ -57,8 +55,6 @@ class DataLoader(object):
             raise TypeError
         if key < 0 or key >= len(self.data):
             raise IndexError
-        #print(len(self.data),len(self.embs),key)
-        #print(self.embs)
         batch = self.data[key]
 
         if self.mode in ["with_kb","with_fine_rels","only_kb"]:
@@ -86,7 +82,7 @@ class DataLoader(object):
         if not self.inference:
             batch_labels = self.mlb.fit_transform(batch_labels).astype(np.float32)
             encoding.update({"labels":torch.from_numpy(batch_labels).to(self.device)})
-        #print(encoding)
+            
         return encoding
 
     def __iter__(self):
