@@ -61,6 +61,5 @@ def get_args():
                         help="if set, use a randomly initialized matrix as KB embedding; for ablation study.")
      group.add_argument('--logging_steps', type=int, default=50,
                          help="Log every X updates steps.")
-     #group.add_argument("--debug",action="store_true")
      args = parser.parse_args()
      return args
