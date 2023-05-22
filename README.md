@@ -25,7 +25,7 @@ Set different learning rates for different corpus in slurm files. Example slurm 
 
 - F1-score 
 
-Average F1-score of 5 runs on each of the corpus.
+Average F1-score of 5 runs on each of the corpus:
 
 | | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
 | --- | --- | --- | --- |
@@ -33,5 +33,12 @@ Average F1-score of 5 runs on each of the corpus.
 | KB-PubMedBERT (Ours) | 65.7 $\pm$ 1.0 (66.5) | 77.8 $\pm$ 0.1 (79.2) | 77.6 $\pm$ 0.4 (77.9) |
 
 The score obtained by majority voting is shown in parentheses. 
+
 $^{\*}$: We use the result on ChemProt (Blurb) reported in the papar of PubMedBERT.
+
+All scores of KB-PubMedBERT are significantly better then these of PubMedBERT under a t-test (with $p < 0.05$). $p$-values on each corpus:
+
+| BB-Rel (p) | ChemProt (Blurb) | DrugProt |
+| --- | --- | --- | --- |
+| 0.046 | 0.008 | 0.021 |
  
