@@ -33,9 +33,9 @@ class BertForSequenceClassification(BertPreTrainedModel):
 
         assert mode in ["no_kb","with_kb","only_kb","with_fine_rels"], "unavailable mode."
 
-        # 1) no_syntax: use pure BERT; 
-        # 2) with_kb: fine-tune graph embeddings;
-        # 3) with_fine_rels: predict scores for existing fine-grained relations from KB; then predict target relations using these scores.
+        # 1) no_kb: use pure BERT; 
+        # 2) with_kb: concatenate graph embeddings of subject and object entities;
+        # 3) with_fine_rels: concatenate scores of existing KB fine-grained relations.
 
         self.bert = BertModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
