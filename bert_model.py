@@ -10,8 +10,6 @@ class_weights = {"drugprot":[1.358,45.340,98.397,2232.586,4980.385,66.610,28.814
                  "chemprot":[1.461,17.083,5.831,75.838,55.830,18.427],
                  "chemprot_blurb":[1.295,23.856,8.098,104.249,78.755,24.807],
                  "bbrel":[1.313,4.195]}
-#constant = 2.0 / 3.1415926535897932384
-#class_weights = [1.461,17.083,5.831,75.838,55.830,18.427] #chemprot weight
 NUM_ENTITIES = {"drugprot":23168,
                 "chemprot":5418,
                 "chemprot_blurb":9365,
@@ -77,9 +75,6 @@ class BertForSequenceClassification(BertPreTrainedModel):
         self.loss_fct = BCEWithLogitsLoss(pos_weight=torch.Tensor(np.log(class_weights[task_name])))     
 
         self.init_weights()
-        #logger.info(kb_embs.shape)
-        #logger.info("BERT model initialised.")
-
 
     def forward(
         self,
@@ -111,7 +106,6 @@ class BertForSequenceClassification(BertPreTrainedModel):
         if self.mode == "only_kb":
             subj_embs, obj_embs = self.get_embs_from_indexes(subj_entity_ids,obj_entity_ids,subj_lengths,obj_lengths)
             pooled_output = self.score_each_relation(subj_embs,obj_embs)
-            #print(pooled_output)
         else:
             pooled_output = outputs[1]
             pooled_output = self.dropout(pooled_output)
