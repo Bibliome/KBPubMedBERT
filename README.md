@@ -21,7 +21,7 @@ Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE
 | PubMedBERT | 5e-5 | | 3e-5 |
 | KB-PubMedBERT (Ours) | 2e-5 | 2e-5 | 2e-5 |
 
-Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on BB-Rel (p).
+Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on ChemProt (Blurb).
 
 :star: F1-score 
 
