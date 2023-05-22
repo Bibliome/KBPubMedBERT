@@ -14,7 +14,7 @@ https://drive.google.com/file/d/18_pxwTBCcDA2TqVfpzAOl-a_AFtVuRS0/view?usp=share
 
 Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE embedding calculation. We follow exactly their instructions to obtain our graph embeddings.
 
-- Optimal learning rate for each corpus
+:star: Optimal learning rate for each corpus
 
 | | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
 | --- | --- | --- | --- |
@@ -23,7 +23,7 @@ Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE
 
 Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on BB-Rel (p).
 
-- F1-score 
+:star: F1-score 
 
 Average F1-score of 5 runs on each of the corpus:
 
@@ -36,7 +36,7 @@ The score obtained by majority voting is shown in parentheses.
 
 $^{\*}$: We use the result on ChemProt (Blurb) reported in the papar of PubMedBERT.
 
-- Significant test
+:star: Significance test
 
 All scores of KB-PubMedBERT are significantly better then these of PubMedBERT under a t-test (with $p < 0.05$). $p$-values on each corpus:
 
