@@ -23,5 +23,14 @@ Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE
 
 Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on BB-Rel (p).
 
+- F1-score 
 
+Average F1-score of 5 runs on each of the corpus.
+
+| | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
+| --- | --- | --- | --- |
+| PubMedBERT | 64.4 $\pm$ 0.7 (65.3) | -$^{\*}$ | 75.8 $\pm$ 0.5 (77.2) |
+| KB-PubMedBERT (Ours) | 65.7 $\pm$ 1.0 (66.5) | 77.8 $\pm$ 0.1 (79.2) | 77.6 $\pm$ 0.4 (77.9) |
+
+$^{\*}$: We use the result on ChemProt (Blurb) reported in the papar of PubMedBERT.
  
