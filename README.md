@@ -36,6 +36,8 @@ The score obtained by majority voting is shown in parentheses.
 
 $^{\*}$: We use the result on ChemProt (Blurb) reported in the papar of PubMedBERT.
 
+- Significant test
+
 All scores of KB-PubMedBERT are significantly better then these of PubMedBERT under a t-test (with $p < 0.05$). $p$-values on each corpus:
 
 | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
