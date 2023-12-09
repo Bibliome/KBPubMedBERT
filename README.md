@@ -11,5 +11,5 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
   python3 main.py --help
   ```
 - Set --force_cpu if no GPU is available
-- Add class weights to the dictionary of "class_weights" in utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_j^{K}N_j}{N_i}$, where $N_i$ is the number of training examples for $c_i$.
+- Add class weights to the dictionary of "class_weights" in utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_{1}^{K}N_j}{N_i}$, where $N_i$ is the number of training examples for $c_i$.
 
