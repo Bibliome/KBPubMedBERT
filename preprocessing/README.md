@@ -28,7 +28,7 @@ train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}. In 
 
 #### ${\color{green}Prepare \ RotatE \ graph \ embeddings}$
 
-Skip this part if you only use models pre-trained on BB-Rel for inference.
+❗Skip this part if you only use models pre-trained on BB-Rel for inference.
 
 🔴 Training of RotatE graph embeddings
 
