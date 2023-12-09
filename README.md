@@ -1,6 +1,6 @@
 # Relation Extraction with RotatE Graph Embeddings
 
-Combining RotatE graph embedding with representations from PubMedBERT helps improve RE performance.
+Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relation Extraction (RE).
 
 ### To reproduce our experimental results
 
