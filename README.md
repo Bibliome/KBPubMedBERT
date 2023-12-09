@@ -4,6 +4,8 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 ### ${\color{orange}Use \ of \ our \ methods \ on \ other \ corpora}$
 
+Refer to the README file in the folder preprocessing to prepare your data.
+
 
 
 ### ${\color{orange}To \ reproduce \ our \ experimental \ results \ on \ BB-Rel_p, \ ChemProt \ and \ DrugProt}$
