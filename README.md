@@ -15,7 +15,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 #### :raised_hand: In case you want to change BERT model (PubMedBERT by default)
 
-- add the corresponding config.json in the folder of "config"
+- add the corresponding config.json under the "config" folder
 - add its Huggingface model card name to "model_download_shortcuts" in utils.py
 
 ### Installation
