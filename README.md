@@ -35,8 +35,15 @@ srun python3 main.py --data_path ./data/$corpus --task_name $corpus --num_labels
 srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb --inference_only
 ```
 ❕Add --dry_run to make a quick pass to check if codes can be executed without errors.
+
 ❗By default, the output path is set to ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. The expected output includes:
 
 - predictions on the validation set (dev_preds.npy), labels given
 - predictions on the test set (test_preds.csv), probabilities given
 - best checkpoint weights saved in the folder "model"
+
+:star: If inference only, you need to specify --checkpoint_path and set --inference_only
+
+- Check "test.pkl" exists under /data/${corpus_name} (data on which inference will be made on).
+- If no checkpoint_path is given, by default the model saved in ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed} will be loaded. Note that you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed even in the case of inference only.
+- The result of inference will be saved under the checkpoint path (test_preds.csv). 
