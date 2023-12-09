@@ -39,15 +39,15 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 
 ❗By default, the output path is set to ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. The expected output includes:
 
-- predictions on the validation set (dev_preds.npy), labels given
-- predictions on the test set (test_preds.csv), probabilities given
-- best checkpoint weights saved in the folder "model"
+- predictions on the validation set (dev_preds.npy), in the form of labels
+- predictions on the test set (test_preds.csv), in the form of probabilities
+- weights of the best checkpoint saved in the folder "model"
 
-:star: If inference only, you need to specify --checkpoint_path and set --inference_only
+:star: If inference only, you need to specify set --inference_only and --checkpoint_path (optional) 
 
-- Check "test.pkl" exists under /data/${corpus_name} (data on which inference will be made on).
-- If no checkpoint_path is given, by default the checkpoint path will be calculated as ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. Note that in this case, you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed even in the case of inference only.
-- If you specify --checkpoint_path, make sure that checkpoint weights are saved under /${checkpoint_path}/model/. Make sure you pass checkpoint_path that contains a "model" folder.  
+- Make sure that "test.pkl" exists under /data/${corpus_name} (data on which the nference will be made).
+- If no checkpoint_path is given, by default the checkpoint path will be calculated as ./models/{corpus_name}_{mode}_{model_type}_{learning_rate}_{seed}. Note that in this case, you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed.
+- If you specify --checkpoint_path, make sure that checkpoint weights are saved under /{checkpoint_path}/model/. Make sure you pass checkpoint_path that contains a "model" folder.  
 - The result of inference will be saved under the checkpoint path (test_preds.csv).  
 
 :star: In case that you use slurm files
