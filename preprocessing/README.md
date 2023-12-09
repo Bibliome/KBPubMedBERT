@@ -2,9 +2,9 @@
 
 Data processing consists of two steps: prepare graph embedding (RotatE) and prepare text files.
 
-##### Prepare RotatE graph embeddings
+##### ${\color{green}Prepare \ RotatE \ graph \ embeddings}$
 
-##### Prepare text files
+##### ${\color{green}Prepare \ text \ files}$
 
 🔴 Prepare a .csv file containing the following columns:
 
