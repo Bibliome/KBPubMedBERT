@@ -6,7 +6,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 
 
-### ${\color{orange}To \ reproduce \ our \ experimental \ results \ on \ BB-Rel<sub>p</sub>, \ ChemProt \ \& \ DrugProt}$
+### ${\color{orange}To \ reproduce \ our \ experimental \ results \ on \ BB-Rel_p, \ ChemProt \ \& \ DrugProt}$
 
 - Download first our data:
 ```
