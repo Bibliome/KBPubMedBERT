@@ -6,7 +6,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 - Refer to the README file in the folder "preprocessing" to prepare your data.
 - Put all datafiles under /data/${corpus_name}.
-- Set the following values in the slurm files (both run_no_kb and run_with_kb): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). Check all available options by:
+- Check all available options by:
   ```
   python3 main.py --help
   ```
@@ -47,3 +47,6 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 - Check "test.pkl" exists under /data/${corpus_name} (data on which inference will be made on).
 - If no checkpoint_path is given, by default the model saved in ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed} will be loaded. Note that you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed even in the case of inference only.
 - The result of inference will be saved under the checkpoint path (test_preds.csv). 
+
+:star: In case that you use slurm files
+- Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). 
