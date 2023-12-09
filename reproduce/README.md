@@ -1,4 +1,4 @@
-### ${\color{orange}To \ reproduce \ our \ experimental \ results \ on \ BB-Rel_p, \ ChemProt \ and \ DrugProt}$
+### ${\color{orange}To \ reproduce \ our \ experimental \ results \ on \ BBRel_p, \ ChemProt \ and \ DrugProt}$
 
 - Download first our data:
 ```
