@@ -12,6 +12,5 @@ Data processing consists of two steps: prepare graph embedding (RotatE) and prep
 - "label": label ids (❗null relation should be labeled by 0).
 - "norm_subj": subject entity normalization (name of concept; multiple normalization separated by '|')
 - "norm_obj": object entity normalization
-(put the same normalization in "norm_subj" and "norm_obj" if the subject and object entity refer to the same entity)
 
 🔴 
