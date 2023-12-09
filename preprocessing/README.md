@@ -23,7 +23,7 @@ train.pkl, dev.pkl, test.pkl, entity2id.pkl, entity_embedding.npy should be gene
 ```
 python3 preprocessing/process.py --data_path ./data/ --inference_only
 ```
-train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}.
+train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}. In case that the test set contains entities than do not exist in pre-trained entity embeddings, oov_entity_embedding.npy should also be generated, and entity2id.pkl will be updated.
 
 🔴 
 
