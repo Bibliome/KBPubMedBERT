@@ -1,6 +1,6 @@
 ### ${\color{orange}Data \ Processing}$
 
-Data processing consists of two steps: prepare graph embedding (RotatE) and prepare text files.
+Data processing consists of two steps: preparation of text files and preparation of graph embeddings (RotatE).
 
 #### ${\color{green}Prepare \ text \ files}$
 
