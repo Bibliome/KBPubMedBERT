@@ -18,3 +18,25 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 - add the corresponding config.json in the folder of "config"
 - add its Huggingface model card name to "model_download_shortcuts" in utils.py
 
+### Installation
+```
+pip install -r requirements
+```
+
+### Example
+
+:white_circle: training (change mode to "with_kb" to inject KB information)
+```
+srun python3 main.py --data_path ./data/$corpus --task_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb
+```
+
+:red_circle: inference only
+```
+srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb --inference_only
+```
+❕Add --dry_run to make a quick pass to check if codes can be executed without errors.
+❗By default, the output path is set to ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. The expected output includes:
+
+- predictions on the validation set (dev_preds.npy), labels given
+- predictions on the test set (test_preds.csv), probabilities given
+- best checkpoint weights saved in the folder "model"
