@@ -6,7 +6,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 
 
-### To reproduce our experimental results on BB-Rel$_p$, ChemProt & DrugProt
+### To reproduce our experimental results on BB-Rel~p~, ChemProt & DrugProt
 
 - Download first our data:
 ```
