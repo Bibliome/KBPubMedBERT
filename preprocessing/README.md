@@ -25,6 +25,17 @@ python3 preprocessing/process.py --data_path ./data/ --inference_only
 ```
 train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}. In case that the test set contains entities than do not exist in pre-trained entity embeddings, oov_entity_embedding.npy should also be generated, and entity2id.pkl will be updated.
 
-🔴 
 
 #### ${\color{green}Prepare \ RotatE \ graph \ embeddings}$
+
+Skip this part if you only use models pre-trained on BB-Rel for inference.
+
+🔴 Training of RotatE graph embeddings
+
+🔴 Load part of pre-trained embeddings (optional but recommended, in case the graph embeddings of the complete knowledge base is too large)
+
+- copy entity_embedding.npy and entities.dict obtained from the last step to /data/pretrained_kges/
+- the following commande load pre-trained embeddings into entity_embedding.npy under /data/ for those entities that exist in the KB. 
+```
+python3 preprocessing/load_pretrained_embeddings.py --data_path ./data/
+```
