@@ -11,5 +11,10 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
   python3 main.py --help
   ```
 - Set --force_cpu if no GPU is available
-- Add class weights to the dictionary of "class_weights" in utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_jN_j}{N_i}$, where $N_i$ is the number of training examples for $c_i$.
+- Add class weights to "class_weights" in utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_jN_j}{N_i}$, where $N_i$ is the number of training examples for $c_i$.
+
+:raised_hand: In case you want to change BERT model (PubMedBERT by default)
+
+- add the corresponding config.json in the folder of "config"
+- add its Huggingface model card name to "model_download_shortcuts" in utils.py
 
