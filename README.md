@@ -45,8 +45,9 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 :star: If inference only, you need to specify --checkpoint_path and set --inference_only
 
 - Check "test.pkl" exists under /data/${corpus_name} (data on which inference will be made on).
-- If no checkpoint_path is given, by default the model saved in ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed} will be loaded. Note that you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed even in the case of inference only.
-- The result of inference will be saved under the checkpoint path (test_preds.csv). 
+- If no checkpoint_path is given, by default the checkpoint path will be calculated as ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. Note that in this case, you still need to specify --corpus_name, --mode, --model_type, --learning_rate and --seed even in the case of inference only.
+- If you specify --checkpoint_path, make sure that checkpoint weights are saved under /${checkpoint_path}/model/. Make sure you pass checkpoint_path that contains a "model" folder.  
+- The result of inference will be saved under the checkpoint path (test_preds.csv).  
 
 :star: In case that you use slurm files
 - Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). 
