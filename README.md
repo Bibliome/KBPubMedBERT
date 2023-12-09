@@ -2,7 +2,7 @@
 
 Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relation Extraction (RE).
 
-### ${\color{blue}Use of our methods on other corpora}$
+### ${\color{orange}Use \ of \ our \ methods \ on \ other \ corpora}$
 
 
 
