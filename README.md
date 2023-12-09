@@ -2,8 +2,8 @@
 
 Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relation Extraction (RE).
 
-### Use of our methods on other corpora
-${\color{red}zfqsf}$
+### ${\color{blue}Use of our methods on other corpora}$
+
 
 
 ### To reproduce our experimental results on BB-Rel<sub>p</sub>, ChemProt & DrugProt
