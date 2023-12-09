@@ -5,7 +5,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 ### ${\color{orange}Use \ our \ methods \ on \ other \ corpora}$
 
 - Refer to the README file in the folder "preprocessing" to prepare your data.
-- Put all datafiles under /data/${corpus_name}.
+- Put all datafiles under /data/{corpus_name}.
 - Check all available options by:
   ```
   python3 main.py --help
@@ -17,7 +17,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 - add the corresponding config.json under the "config" folder
 - add its Huggingface model card name to "model_download_shortcuts" in utils.py
-- set --model_type ${bert_model_name}, e.g. --model_type biobert
+- set --model_type {bert_model_name}, e.g. --model_type biobert
 
 ### Installation
 ```
