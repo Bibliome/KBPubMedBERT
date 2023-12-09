@@ -8,9 +8,10 @@ Data processing consists of two steps: prepare graph embedding (RotatE) and prep
 
 🔴 Prepare a .csv file containing the following columns:
 
-- sentence (with candidate entities marked by entity markers: "@@" before and after the subject entity; "$$" for the object entity; "¢¢" for the case where text spans of the subject and object entity overlap)
-- label ids (❗null relation should be labeled by 0)
-- subject entity normalization (name of concept; multiple normalization separated by '|')
-- object entity normalization
+- "sentence": the full sentence with candidate entities marked by entity markers: "@@" before and after the subject entity; "$$" for the object entity; "¢¢" for the case where text spans of the subject and object entity overlap.
+- "label": label ids (❗null relation should be labeled by 0).
+- "norm_subj": subject entity normalization (name of concept; multiple normalization separated by '|')
+- "norm_obj": object entity normalization
+(put the same normalization in "norm_subj" and "norm_obj" if the subject and object entity refer to the same entity)
 
 🔴 
