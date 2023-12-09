@@ -2,15 +2,29 @@
 
 Data processing consists of two steps: prepare graph embedding (RotatE) and prepare text files.
 
-#### ${\color{green}Prepare \ RotatE \ graph \ embeddings}$
-
 #### ${\color{green}Prepare \ text \ files}$
 
-🔴 Prepare a .csv file containing the following columns:
+🔴 Prepare csv files containing the following columns (refer to /data/test.csv as an example):
 
 - "sentence": the full sentence with candidate entities marked by entity markers: "@@" before and after the subject entity; "$$" for the object entity; "¢¢" for the case where text spans of the subject and object entity overlap.
 - "label": label ids (❗null relation should be labeled by 0).
 - "norm_subj": subject entity normalization (name of concept; multiple normalization separated by '|')
 - "norm_obj": object entity normalization
 
+❗in case of inter-sentence candidate relation, link the two sentences that contain respectively subject and object entity by 'ç', deleting any other sentences (that do not contain candidate entities) in-between. 
+
+⭐ In case that you want to train your own model: under the main directory put train.csv, dev.csv, test.csv under /data/${corpus_name}, then run the following command:
+```
+python3 preprocessing/process.py --data_path ./data/
+```
+train.pkl, dev.pkl, test.pkl, entity2id.pkl, entity_embedding.npy should be generated under /data/${corpus_name}. 
+
+⭐ In case that you only want to make inferences using models pre-trained on BB-Rel: put test.csv under /data/${corpus_name}. Make sure that entity2id.pkl exists under the same directory. Run the following command:
+```
+python3 preprocessing/process.py --data_path ./data/ --inference_only
+```
+train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}.
+
 🔴 
+
+#### ${\color{green}Prepare \ RotatE \ graph \ embeddings}$
