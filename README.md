@@ -2,7 +2,7 @@
 
 Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relation Extraction (RE).
 
-### ${\color{orange}Use \ of \ our \ methods \ on \ other \ corpora}$
+### ${\color{orange}Use \ our \ methods \ on \ other \ corpora}$
 
 - Refer to the README file in the folder "preprocessing" to prepare your data.
 - Put all datafiles under /data/${corpus_name}.
