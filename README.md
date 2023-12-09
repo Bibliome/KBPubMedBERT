@@ -6,7 +6,9 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 - Refer to the README file in the folder "preprocessing" to prepare your data.
 - Put all datafiles under /data/${corpus_name}.
-- Set the following values in the slurm files (both run_no_kb and run_with_kb): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). Check all options by:
+- Set the following values in the slurm files (both run_no_kb and run_with_kb): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). Check all available options by:
   ```
   python3 main.py --help
-  ``` 
+  ```
+- Set --force_cpu if no GPU is available
+
