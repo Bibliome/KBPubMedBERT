@@ -17,6 +17,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 - add the corresponding config.json under the "config" folder
 - add its Huggingface model card name to "model_download_shortcuts" in utils.py
+- set --model_type ${bert_model_name}, e.g. --model_type biobert
 
 ### Installation
 ```
