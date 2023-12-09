@@ -29,9 +29,7 @@ Refer to https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding for RotatE
 
 Set different learning rates for different corpus in slurm files. Example slurm files will reproduce results on ChemProt (Blurb).
 
-:star: F1-score 
-
-Average F1-score of 5 runs on each of the corpus:
+:star: Average F1-score (5 runs):
 
 | | BB-Rel (p) | ChemProt (Blurb) | DrugProt |
 | --- | --- | --- | --- |
