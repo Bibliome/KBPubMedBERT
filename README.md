@@ -24,6 +24,37 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 pip install -r requirements
 ```
 
+### Quick Start
+
+⚪ Training
+1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download directly pre-trained graph embeddings for BB-Rel (3.3G):
+```
+```
+2. Generate Data
+```
+sbatch process.slurm {corpus_name} false true
+```
+3. Train without KB information (will train a single model seeded by 61; you can change hyper-parameters in run_no_kb.slurm)
+```
+sbatch run_no_kb.slurm
+```
+4. Train with KB information (will train a single model seeded by 61; you can change hyper-parameters in run_no_kb.slurm)
+```
+sbatch run_with_kb.slurm
+```
+
+🔴 Inference only
+1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download directly pre-trained graph embeddings for BB-Rel (3.3G):
+```
+```
+2. Download a model pre-trained on BB-Rel (10 models to choose); or you can just use run the previous part and train them using the data provided (data/bbrel/).
+```
+```
+3. Inference using a chosen model:
+```
+sbatch inference.slurm {corpus_name} {checkpoint_path}
+``` 
+
 ### Example
 
 :white_circle: training (change mode to "with_kb" to inject KB information)
