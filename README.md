@@ -28,7 +28,7 @@ pip install -r requirements
 
 :white_circle: training (change mode to "with_kb" to inject KB information)
 ```
-srun python3 main.py --data_path ./data/$corpus --task_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb
+srun python3 main.py --data_path ./data/$corpus  --corpus_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb
 ```
 
 :red_circle: inference only
