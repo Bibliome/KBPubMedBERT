@@ -283,7 +283,7 @@ def main():
     if args.inference_only and args.mode == "with_kb":
         oov_entity_embs = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
         if len(oov_entity_embs) != 0:
-            model.entity_embs.weight.data = torch.FloatTensor(np.vstack(model.entity_embs.weight.data.numpy(),oov_entity_embs))	
+            model.entity_embs.weight.data = torch.FloatTensor(np.vstack((model.entity_embs.weight.data.numpy(),oov_entity_embs)))	
     model.to(args.device)
   
     if not args.inference_only:
