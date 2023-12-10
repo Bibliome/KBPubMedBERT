@@ -4,12 +4,12 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 ### ${\color{orange}Use \ our \ methods \ on \ your \ own \ corpora}$
 
-- Refer to the README file in the folder /preprocessing/ to prepare your data.
+- Refer to the README file in /preprocessing/ to prepare your own data.
 - Check all available options by:
   ```
   python3 main.py --help
   ```
-- Add class weights to "class_weights" in /preprocessing/utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_jN_j}{N_i}$, where $N_i$ is the number of training examples for $c_i$.
+- Add class weights of your dataset to "class_weights" in /preprocessing/utils.py. For each of K classes $c_i$, its weight should be $\frac{\sum_jN_j}{N_i}$, where $N_i$ is the number of training examples labeled by $c_i$.
 
 #### :raised_hand: In case you want to change BERT model (PubMedBERT by default)
 
@@ -25,7 +25,7 @@ pip install -r requirements
 ### Quick Start
 
 ⚪ Training
-1. Follow instructions in /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download pre-trained graph embeddings of DSMZ+Genbank+Cirm (3.3G) and put them under /data/{corpus_name}/:
+1. Follow instructions in /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download pre-trained graph embeddings of DSMZ+Genbank+Cirm (~3.3G) under /data/{corpus_name}/:
 ```
 gdown --folder https://drive.google.com/drive/folders/1zLzaMO9f_1qHTAxh4CZtR0yELKshWU6g?usp=sharing
 ```
