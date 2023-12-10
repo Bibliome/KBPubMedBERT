@@ -33,19 +33,18 @@ train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}. In 
 🔴 Train RotatE graph embeddings
 
 - Retrieve codes from https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding.
-- Prepare the following files under the directory /KnowledgeGraphEmbedding/data/{corpus_name} (create the folder ❗❗ not under this directory but under /KnowledgeGraphEmbedding
-/): train.txt, dev.txt, test.txt (create an empty test.txt); entities.dict and relations.dict (See explanations under /data/for_rotate/).
+- Prepare the following files under the directory /KnowledgeGraphEmbedding/data/{corpus_name} (❗❗ not under this directory but under /KnowledgeGraphEmbedding/): train.txt, dev.txt, test.txt (create an empty test.txt); entities.dict and relations.dict (See explanations under /data/for_rotate/).
 - Put train_rotate_embeddings.slurm under /KnowledgeGraphEmbedding/ and lanuch it to start training:
 ```
 sbatch train_rotate_embedding.slurm {corpus_name}
 ```
-- Once training finishes, copy entities.dict (from KnowledgeGraphEmbedding/data/{corpus_name}), entity_embedding.npy and relation_embedding.npy (from KnowledgeGraphEmbedding/models/{corpus_name}) to /data/{corpus_name}/pretrained_kges/ (under this directory).
-- ❗You should only keep relation embeddings that are "useful". For example, the embedding of the relation "is_a" should NOT be kept in relation_embedding.npy, because it is not similar to any relation that we want to extract.
+- Once training finishes, copy entities.dict (from KnowledgeGraphEmbedding/data/{corpus_name}) and entity_embedding.npy (from KnowledgeGraphEmbedding/models/{corpus_name}) to RE_with_RotatE_graph_embs/models/{corpus_name}/pretrained_kges/.
+- copy relation_embedding.npy (from KnowledgeGraphEmbedding/models/{corpus_name}) to RE_with_RotatE_graph_embs/data/{corpus_name}.❗You should only keep relation embeddings that are "useful" for relation extraction. For example, the embedding of the relation "is_a" should NOT be kept in relation_embedding.npy, because it is not similar to any relation that we want to extract.
 
 🔴 Load part of pre-trained embeddings to a smaller entity embedding matrix that we need for training (optional but recommended, in case the graph embeddings of the complete knowledge base is too large)
 
 - Make sure that entities.dict and entity_embedding.npy exist under /data/{corpus_name}/pretrained_kges/.
 - Use the following command to load pre-trained embeddings into entity_embedding.npy. 
 ```
-python3 preprocessing/load_pretrained_embeddings.py --data_path ./data/
+python3 preprocessing/load_pretrained_embeddings.py --data_path ./data/{corpus_name}
 ```
