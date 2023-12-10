@@ -30,12 +30,18 @@ train.pkl, dev.pkl, test.pkl should be generated under /data/${corpus_name}. In 
 
 ❗Skip this part if you only use models pre-trained on BB-Rel for inference.
 
-🔴 Training of RotatE graph embeddings
+🔴 Train RotatE graph embeddings
 
-🔴 Load part of pre-trained embeddings (optional but recommended, in case the graph embeddings of the complete knowledge base is too large)
+- Retrieve codes from https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding.
+- Prepare the following files under the directory /KnowledgeGraphEmbedding/data/{corpus_name} (create the folder ❗❗ not under this directory but under /KnowledgeGraphEmbedding
+/): train.txt, dev.txt, test.txt (create an empty test.txt); entities.dict and relations.dict (explanation under /data/for_rotate/).
+- Put train_rotate_embeddings.slurm under /KnowledgeGraphEmbedding/ and lanuch it to start training (sbatch train_rotate_embeddings.slurm).
+- Once training finishes, copy entities.dict and entity_embedding.npy from KnowledgeGraphEmbedding/data/{corpus_name} to /data/{corpus_name}/pretrained_kges/ (under this directory).
 
-- copy entities.dict and entity_embedding.npy obtained from the last step to /data/pretrained_kges/
-- the following commande load pre-trained embeddings into entity_embedding.npy under /data/ for those entities that exist in the KB. 
+🔴 Load part of pre-trained embeddings to a smaller entity embedding matrix that we need for training (optional but recommended, in case the graph embeddings of the complete knowledge base is too large)
+
+- Make sure that entities.dict and entity_embedding.npy exist under /data/{corpus_name}/pretrained_kges/.
+- Use the following command to load pre-trained embeddings into entity_embedding.npy. 
 ```
 python3 preprocessing/load_pretrained_embeddings.py --data_path ./data/
 ```
