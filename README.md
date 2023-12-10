@@ -56,6 +56,7 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 ### Example: complete pipeline (demo test)
 
 🔴 Training from scratch
+
 ❗remove the option --do_not_overwrite_entity_embedding of the first command in real use.
 ```
 python3 preprocessing/process.py --data_path ./data/ --do_not_overwrite_entity_embedding
