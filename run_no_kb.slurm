@@ -22,7 +22,7 @@ printf "run on %s (number of classes=%i)\n" "$corpus" "$nl"
 
 # uncomment the following line to set your seeds
 # for seed in 42 55 61 93 96
-for seed in 42
+for seed in 61
 do
   srun python3 main.py --data_path ./data/$corpus  --corpus_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode no_kb 
 done
