@@ -53,7 +53,7 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 :star: In case that you use slurm files
 - Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr).
 
-### A demo complete pipeline
+### Example: complete pipeline
 
 🔴 Complete training
 ```
