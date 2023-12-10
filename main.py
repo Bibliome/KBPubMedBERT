@@ -256,9 +256,10 @@ def main():
                                                                 mode=args.mode)
 
         if args.mode == "with_kb":
-            print(np.allclose(model.entity_embs.weight.data.numpy(),entity_embs))
-            model.entity_embs.weight.data = torch.FloatTensor(entity_embs)
-            print(np.allclose(model.entity_embs.weight.data.numpy(),entity_embs))
+            kg_entity_embeddings = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
+            print(np.allclose(model.entity_embs.weight.data.numpy(),kg_entity_embeddings))
+            model.entity_embs.weight.data = torch.FloatTensor(kg_entity_embeddings)
+            print(np.allclose(model.entity_embs.weight.data.numpy(),kg_entity_embeddings))
         model.to(args.device)
    
         checkpoint, _, _, _ = train(args,train_dataloader,dev_dataloader,model)
@@ -278,7 +279,10 @@ def main():
                                                           relation_embs=relation_embs,
                                                           num_labels=args.num_labels,
                                                           mode=args.mode)
-
+    if args.mode == "with_kb":
+    	kg_entity_embeddings = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
+        print(np.allclose(model.entity_embs.weight.data.numpy(),kg_entity_embeddings)) 
+	    
     # in case of inference only, we need to extend entity embeddings of the pre-trained model to accomodate entities that are not seen in training.
     if args.inference_only and args.mode == "with_kb":
         oov_entity_embs = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
