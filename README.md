@@ -51,4 +51,24 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 - The result of inference will be saved under the checkpoint path (test_preds.csv).  
 
 :star: In case that you use slurm files
-- Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr). 
+- Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr).
+
+### A demo complete pipeline
+
+🔴 Complete training
+```
+python3 preprocessing/process.py --data_path ./data/ --do_not_overwrite_entity_embedding
+#python3 preprocessing/load_pretrained_embeddings --data_path ./data/
+#python3 main.py --data_path ./data/bbrel/  --corpus_name bbrel --num_labels 2 --num_train_epochs 60 --seed 42 --warmup --learning_rate 5e-5 --mode no_kb
+#python3 main.py --data_path ./data/bbrel/  --corpus_name bbrel --num_labels 2 --num_train_epochs 60 --seed 42 --warmup --learning_rate 2e-5 --mode with_kb
+sbatch run_no_kb.slurm
+sbatch run_with_kb.slurm
+```
+
+🔴 Inference only
+```
+python3 preprocessing/process.py --data_path ./data/ --inference_only
+#python3 preprocessing/load_pretrained_embeddings --data_path ./data/ --inference_only
+#python3 main.py --data_path ./data/bbrel --corpus_name bbrel --mode with_kb --checkpoint_path ./models/ckpt/ --inference_only
+sbatch inference.slurm 
+```
