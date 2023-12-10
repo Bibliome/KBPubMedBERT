@@ -59,10 +59,9 @@ def process(args,df,entity2id):
             entity2id[entity] = max_id
             oov_entity2id[entity] = ix
             ix += 1
-        if len(oov_entity_embeddings) != 0:
-            np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
-            pickle.dump(oov_entity2id,open(os.path.join(args.data_path,"oov_entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
-            pickle.dump(entity2id,open(os.path.join(args.data_path,"entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
+        np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
+        pickle.dump(oov_entity2id,open(os.path.join(args.data_path,"oov_entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
+        pickle.dump(entity2id,open(os.path.join(args.data_path,"entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
         fp = csv2pickle(args,df,entity2id)
         return fp
     else:
