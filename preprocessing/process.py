@@ -6,11 +6,15 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from transformers import AutoTokenizer
-from utils.utils import model_download_shortcuts
 
 # emb_range is a parameter used to initialize RotatE embeddings, emb_dim is the embedding dimension, DO NOT change them.
 emb_range = 0.13
 emb_dim = 400
+
+model_download_shortcuts = {"bert":"bert-base-uncased",
+                            "biobert":"dmis-lab/biobert-base-cased-v1.1",
+                            "scibert":"allenai/scibert_scivocab_uncased",
+                            "pubmedbert":"microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract"}
 
 def csv2pickle(args,df,entity2id):
     tokenizer = AutoTokenizer.from_pretrained(model_download_shortcuts[args.model_type])
@@ -47,12 +51,17 @@ def process(args,df,entity2id):
         embs = torch.zeros(len(oov_entities),emb_dim)
         nn.init.uniform_(tensor=embs,a=-emb_range,b=emb_range)
         oov_entity_embeddings = embs.cpu().numpy()
+        oov_entity2id = {}
 
+        ix = 0
         for entity in oov_entities:
             max_id += 1
             entity2id[entity] = max_id
+            oov_entity2id[entity] = ix
+            ix += 1
         if len(oov_entity_embeddings) != 0:
             np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
+        pickle.dump(oov_entity2id,open(os.path.join(args.data_path,"oov_entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
         pickle.dump(entity2id,open(os.path.join(args.data_path,"entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
         fp = csv2pickle(args,df,entity2id)
         return fp
