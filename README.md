@@ -47,6 +47,7 @@ sbatch run_with_kb.slurm
 1. (optional) Same as the first step for training (❗If you skip the first step, entities that do no exist in training will be initialized randomly and might degrade the performance.)
 2. Download a model pre-trained on BB-Rel (10 models to choose; 5 each for no_kb and with_kb):
 ```
+gdown --folder https://drive.google.com/drive/folders/1kVoBsKMBQ3ghTalfirP9uxjYZx45yHH0?usp=drive_link
 ```
 or you can just use run the previous part and train them using the data provided (data/bbrel/).
 3. Generate data (without pre-trained KG embeddings; otherwise set the last parameter to true)
