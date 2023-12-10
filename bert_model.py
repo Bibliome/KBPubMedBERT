@@ -4,7 +4,7 @@ import torch
 from torch import nn
 from torch.nn import BCEWithLogitsLoss
 from transformers import (BertPreTrainedModel, BertModel)
-from utils.utils import class_weights
+from preprocessing.utils import class_weights
 
 logger = logging.getLogger(__name__)
 
