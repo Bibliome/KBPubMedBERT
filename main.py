@@ -254,8 +254,8 @@ def main():
                                                                 num_labels=args.num_labels,
                                                                 mode=args.mode)
 
-	print(np.allclose(model.entity_embs.weight.data.numpy(),entity_embs))
-        model.entity_embs.weight.data = entity_embs
+        print(np.allclose(model.entity_embs.weight.data.numpy(),entity_embs))
+        model.entity_embs.weight.data = torch.FloatTensor(entity_embs)
         print(np.allclose(model.entity_embs.weight.data.numpy(),entity_embs))
         model.to(args.device)
    
@@ -279,9 +279,9 @@ def main():
 
     # in case of inference only, we need to extend entity embeddings of the pre-trained model to accomodate entities that are not seen in training.
     if args.inference_only:
-    	oov_entity_embs = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
-	if len(oov_entity_embs) != 0:
-	    model.entity_embs.weight.data = torch.FloatTensor(np.vstack(model.entity_embs.weight.data.numpy(),oov_entity_embs))	
+        oov_entity_embs = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
+        if len(oov_entity_embs) != 0:
+            model.entity_embs.weight.data = torch.FloatTensor(np.vstack(model.entity_embs.weight.data.numpy(),oov_entity_embs))	
     model.to(args.device)
   
     if not args.inference_only:
