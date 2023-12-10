@@ -280,7 +280,7 @@ def main():
                                                           num_labels=args.num_labels,
                                                           mode=args.mode)
     if args.mode == "with_kb":
-    	kg_entity_embeddings = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
+        kg_entity_embeddings = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
         print(np.allclose(model.entity_embs.weight.data.numpy(),kg_entity_embeddings)) 
 	    
     # in case of inference only, we need to extend entity embeddings of the pre-trained model to accomodate entities that are not seen in training.
