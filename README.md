@@ -27,8 +27,9 @@ pip install -r requirements
 ### Quick Start
 
 ⚪ Training
-1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download pre-trained graph embeddings of DSMZ+Genbank+Cirm (3.3G):
+1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download pre-trained graph embeddings of DSMZ+Genbank+Cirm (3.3G) under /data/{corpus_name}/pretrained_kges/:
 ```
+gdown --folder https://drive.google.com/drive/folders/1zLzaMO9f_1qHTAxh4CZtR0yELKshWU6g?usp=sharing
 ```
 2. Generate Data
 ```
