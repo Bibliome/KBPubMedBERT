@@ -64,7 +64,7 @@ sbatch inference.slurm {corpus_name} {checkpoint_path} {no_kb / with_kb}
 
 ### Output
 
-:star: In case of training, the output path is set to ./models/${corpus_name}_${mode}_${model_type}_${learning_rate}_${seed}. The expected output includes:
+:star: In case of training, the output path is set to ./models/{corpus_name}_{mode}_{model_type}_{learning_rate}_{seed}. The expected output includes:
 - predictions on the validation set (dev_preds.npy), in the form of labels
 - predictions on the test set (test_preds.csv), in the form of probabilities
 - weights of the best checkpoint saved in the folder "model"
