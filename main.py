@@ -214,10 +214,11 @@ def main():
 
     # prepare model
     config = BertConfig.from_pretrained(os.path.join(args.config_path,f"{args.model_type}.json"),num_labels=args.num_labels)
-     
-    output_path = os.path.join(args.output_path,f"{args.corpus_name}_{args.mode}_{args.model_type}_{args.learning_rate}_{args.seed}")
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
+
+    if not args.checkpoint_path:
+    	output_path = os.path.join(args.output_path,f"{args.corpus_name}_{args.mode}_{args.model_type}_{args.learning_rate}_{args.seed}")
+    	if not os.path.exists(output_path):
+            os.makedirs(output_path)
 
     if args.mode == "with_kb":
         entity_embs = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
