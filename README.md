@@ -55,7 +55,7 @@ srun python3 main.py --data_path ./data/$corpus  --task_name $corpus --num_label
 
 ### Example: complete pipeline
 
-🔴 Complete training
+🔴 Training from scratch
 ```
 python3 preprocessing/process.py --data_path ./data/ --do_not_overwrite_entity_embedding
 #python3 preprocessing/load_pretrained_embeddings --data_path ./data/
