@@ -23,5 +23,5 @@ printf "run on %s (number of classes=%i)\n" "$corpus" "$nl"
 
 for seed in 42 55 61 93 96
 do
-  srun python3 main.py  --data_path ./data/$corpus --pretrained_model_path ./pretrained_models/  --corpus_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode with_kb 
+  srun python3 main.py  --data_path ./data/$corpus  --corpus_name $corpus --num_labels $nl --num_train_epochs $ne --seed $seed --warmup --learning_rate ${lr} --mode with_kb 
 done
