@@ -9,7 +9,7 @@
 
 corpus=$1
 ckpt=$2
+mode=$3
 
-#srun python3 main.py --data_path ./data/$corpus --corpus_name $corpus --num_labels $nl --seed $seed --learning_rate ${lr} --mode with_kb --inference_only
-srun python3 main.py --data_path ./data/$corpus --corpus_name $corpus --mode with_kb --checkpoint_path $ckpt --inference_only
+srun python3 main.py --data_path ./data/$corpus --corpus_name $corpus --mode $mode --checkpoint_path $ckpt --inference_only
 
