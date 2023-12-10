@@ -16,7 +16,7 @@ from tqdm import tqdm, trange
 from sklearn.metrics import f1_score
 from opt import get_args
 from loader import DataLoader
-from utils.utils import model_download_shortcuts
+from preprocessing.utils import model_download_shortcuts
 
 logger = logging.getLogger(__name__)
 embedding_weight_list = ["kb_embs.weight","rel_embs"]
