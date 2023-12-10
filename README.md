@@ -27,7 +27,7 @@ pip install -r requirements
 ### Quick Start
 
 ⚪ Training
-1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download directly pre-trained graph embeddings for BB-Rel (3.3G):
+1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download pre-trained graph embeddings of DSMZ+Genbank+Cirm (3.3G):
 ```
 ```
 2. Generate Data
@@ -44,13 +44,16 @@ sbatch run_with_kb.slurm
 ```
 
 🔴 Inference only
-1. Follow instructions under /preprocessing/ to prepare pre-trained RotatE graph embeddings. You can also download directly pre-trained graph embeddings for BB-Rel (3.3G):
+1. (optional) Same as the first step for training (❗If you skip the first step, entities that do no exist in training will be initialized randomly and might degrade the performance.)
+2. Download a model pre-trained on BB-Rel (10 models to choose; 5 each for no_kb and with_kb):
 ```
 ```
-2. Download a model pre-trained on BB-Rel (10 models to choose); or you can just use run the previous part and train them using the data provided (data/bbrel/).
+or you can just use run the previous part and train them using the data provided (data/bbrel/).
+3. Generate data (without pre-trained KG embeddings; otherwise set the last parameter to true)
 ```
+sbatch process.slurm {corpus_name} true false
 ```
-3. Inference using a chosen model:
+4. Inference using a chosen model. Note that checkpoint weights should be saved under /checkpoint_path/model/
 ```
 sbatch inference.slurm {corpus_name} {checkpoint_path}
 ``` 
