@@ -57,7 +57,7 @@ sbatch process.slurm {corpus_name} true false
 ```
 4. Inference using a chosen model. Note that checkpoint weights should be saved under /checkpoint_path/model/
 ```
-sbatch inference.slurm {corpus_name} {checkpoint_path}
+sbatch inference.slurm {corpus_name} {checkpoint_path} {no_kb / with_kb}
 ``` 
 
 ### Example
