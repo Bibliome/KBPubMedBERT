@@ -32,9 +32,12 @@ def load_pretrained_embeddings(args):
             np.save(open(os.path.join(args.data_path,"entity_embedding.npy"),"wb"),entity_embeddings)
             print("pre-trained graph embeddings are loaded.")
     else:
-        if os.path.exists(os.path.join(args.data_path,"oov_entity2id.pkl")):
-            oov_entity2id = pickle.load(open(os.path.join(args.data_path,"oov_entity2id.pkl"),"rb"))
-            oov_entity_embeddings = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
+        assert os.path.exists(os.path.join(args.data_path,"oov_entity2id.pkl")), "run process.slurm first."
+        oov_entity2id = pickle.load(open(os.path.join(args.data_path,"oov_entity2id.pkl"),"rb"))
+        oov_entity_embeddings = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
+        if len(oov_entity2id) == 0:
+            print("no out-of-vocabulary entities.")
+        else:
             num_iv_oov_entities = 0
             for entity in oov_entity2id:
                 if entity in pretrained_entity2id:
@@ -44,8 +47,6 @@ def load_pretrained_embeddings(args):
             if num_iv_oov_entities != 0:
                 np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
                 print("pre-trained graph embeddings are loaded.")
-        else:
-            print("no out-of-vocabulary entities.")
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Load pre-trained RotatE embeddings to entity embedding matrix used for training.")
