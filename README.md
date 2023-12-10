@@ -72,7 +72,7 @@ sbatch inference.slurm {corpus_name} {checkpoint_path} {no_kb / with_kb}
 :star: In case of inference only, the output path is the same as {checkpoint_path}.
 - make sure that the folder {checkpoint_path}/model/ exists and pre-trained model weights are saved under /{checkpoint_path}/model/.
 
-:bulb: In case that you use slurm files (run_no_kb.slurm and run_with_kb.slurm)
+:bulb: In case that you use slurm files
 - Set the following values in the slurm files (both run_no_kb.slurm and run_with_kb.slurm): number of labels (nl); number of training epochs (ne); corpus name (corpus); learning rate (lr).
 - inference.slurm has three parameters: {corpus_name} ($1); {checkpoint_path} ($2); {mode} ($3, no_kb or with_kb).
 - process.slurm has three parameters: {corpus_name} ($1); {inference_only} ($2, true or false); {pretrained_kge} ($3, true or false).
