@@ -6,15 +6,11 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from transformers import AutoTokenizer
+from utils.utils import model_download_shortcuts
 
 # emb_range is a parameter used to initialize RotatE embeddings, emb_dim is the embedding dimension, DO NOT change them.
 emb_range = 0.13
 emb_dim = 400
-
-model_download_shortcuts = {"bert":"bert-base-uncased",
-                            "biobert":"dmis-lab/biobert-base-cased-v1.1",
-                            "scibert":"allenai/scibert_scivocab_uncased",
-                            "pubmedbert":"microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract"}
 
 def csv2pickle(args,df,entity2id):
     tokenizer = AutoTokenizer.from_pretrained(model_download_shortcuts[args.model_type])
