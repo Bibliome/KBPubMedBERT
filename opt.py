@@ -8,6 +8,7 @@ def get_args():
      group.add_argument("--data_path", default=None, type=str,required=True,
                          help="The input data directory. Should contain data files (.pkl) for the task; in case of "
                               "using graph embeddings, should contain embedding files (.npy).")
+     group.add_argument("--input_filename",type=str)
      group.add_argument("--mode",type=str,required=True,
                          help="no_kb (only BERT) or with_kb (with knowledge base).")
      group.add_argument("--inference_only",action="store_true",
@@ -17,6 +18,7 @@ def get_args():
                               "is given, the checkpoint path will by default be set to corpus_mode_bertName_learningRate_seed")
      group.add_argument("--model_type",default="pubmedbert",type=str,
                          help="abbreviation of model to use")
+     group.add_argument("--model_path",default="./models"/,type=str)
      group.add_argument("--pretrained_model_path", default="./pretrained_models/", type=str,
                          help="Path to pre-trained model or shortcut name")
      group.add_argument("--force_cpu",action="store_true",
@@ -24,7 +26,8 @@ def get_args():
      group.add_argument("--config_path", default="./config/", type=str,
                          help="Path to pre-trained config or shortcut name selected in the list")
      group.add_argument("--corpus_name", default=None, type=str)
-     group.add_argument("--output_path", default="./models/", type=str,
+     group.add_argument("--tmp_path",default="./tmp/",type=str)
+     group.add_argument("--output_path", default="./predictions/", type=str,
                          help="The output directory where the model predictions and checkpoints will be written.")
      group.add_argument("--num_labels",type=int,default=2,
                          help="number of layers in the last linear layer")
