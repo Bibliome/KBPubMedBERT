@@ -136,7 +136,7 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
             best_epoch = epoch
             
             # save model
-            output_path = os.path.join(args.output_path,best_model_path)
+            output_path = os.path.join(args.model_path,best_model_path)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
             model.save_pretrained(output_path)
@@ -148,7 +148,7 @@ def train(args,train_dataloader,dev_dataloader,model,loading_info=None):
             best_epoch = epoch
 
             # save model
-            output_path = os.path.join(args.output_path,best_model_path)
+            output_path = os.path.join(args.model_path,best_model_path)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
             model.save_pretrained(output_path)
@@ -199,10 +199,12 @@ def main():
     args.n_gpu = torch.cuda.device_count()
     args.device = device
 
-    if not os.path.exists("logging"):
-        os.makedirs("logging")
-    if not os.path.exists("models"):
-        os.makedirs("models")
+    if not os.path.exists(args.logging_path):
+        os.makedirs(args.logging_path)
+    if not os.path.exists(args.model_path):
+        os.makedirs(args.model_path)
+    if not os.path.exists(args.output_path):
+        os.makedirs(args.output_path)
 
     # Setup logging
     if not args.inference_only:
@@ -214,11 +216,15 @@ def main():
 
     # prepare model
     config = BertConfig.from_pretrained(os.path.join(args.config_path,f"{args.model_type}.json"),num_labels=args.num_labels)
-
+     
+    if args.inference_only:
+        args.checkpoint_path, "In case of inference only, indicate the path to a pre-trained model."
     if not args.checkpoint_path:
     	output_path = os.path.join(args.output_path,f"{args.corpus_name}_{args.mode}_{args.model_type}_{args.learning_rate}_{args.seed}")
-    	if not os.path.exists(output_path):
-            os.makedirs(output_path)
+    else:
+        output_path = os.path.join(args.output_path,"inference")
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
 
     if args.mode == "with_kb":
         entity_embs = np.load(os.path.join(args.data_path,"entity_embedding.npy"))
@@ -263,11 +269,10 @@ def main():
         checkpoint, _, _, _ = train(args,train_dataloader,dev_dataloader,model)
     
     else:
-        test_dataloader = DataLoader(args,"test",inference=True)
+        test_dataloader = DataLoader(args,args.input_filename.split('.')[0],inference=True)
         torch.cuda.empty_cache()
         if args.checkpoint_path:
             checkpoint = os.path.join(args.checkpoint_path,"model")
-            output_path = args.checkpoint_path
         else:
             checkpoint = f"./models/{args.corpus_name}_{args.mode}_{args.model_type}_{args.learning_rate}_{args.seed}/model"
     
@@ -292,7 +297,12 @@ def main():
 
     test_preds = evaluate(test_dataloader,model,args.num_labels,predict_only=True)
     df_probs = pd.DataFrame({c:test_preds[:,i] for i,c in enumerate(list(range(args.num_labels)))})
-    df_probs.to_csv(os.path.join(output_path,"test_preds.csv"),index=False)
+    
+    if args.inference_only:
+        fn = args.input_filename.split('.')[0]
+        df_probs.to_csv(os.path.join(output_path,f"prediction_{fn}.csv"),index=False)
+    else:
+        df_probs.to_csv(os.path.join(output_path,"test_preds.csv"),index=False)
 
     print("finished.")
     
