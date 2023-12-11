@@ -45,7 +45,7 @@ sbatch run_with_kb.slurm
 
 🔴 Inference only
 1. (optional) Same as the first step for training: obtain pre-trained RotatE graph embeddings. (❗If you skip the first step, entities that do no exist in training will be initialized randomly and might degrade the performance)
-2. Download a model pre-trained on BB-Rel (10 models to choose, links in pretrained_download_links.csv):
+2. Download a model pre-trained on BB-Rel under /models/ (10 models to choose, links in pretrained_download_links.csv):
 ```
 gdown --folder https://drive.google.com/drive/folders/1kVoBsKMBQ3ghTalfirP9uxjYZx45yHH0?usp=drive_link
 ```
