@@ -1,8 +1,8 @@
 torch==1.13.0
 transformers==4.6.0
-scikit-learn==0.23.2
-scipy==1.5.2
-numpy==1.19.2
-pandas==1.1.3
-gdown==4.7.1
+scikit-learn
+scipy
+numpy
+pandas
+gdown
 python==3.8.5
