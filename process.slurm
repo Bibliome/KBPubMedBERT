@@ -12,9 +12,10 @@
 corpus=$1
 inference=$2
 pretrained_kge=$3
+filename=$4
 
 if [ "$inference" = true ]; then
-  srun python3 preprocessing/process.py --data_path ./data/$corpus --inference_only
+  srun python3 preprocessing/process.py --data_path ./data/$corpus --inference_only --input_filename $filename
 else
   srun python3 preprocessing/process.py --data_path ./data/$corpus
 fi
