@@ -32,9 +32,10 @@ def load_pretrained_embeddings(args):
             np.save(open(os.path.join(args.data_path,"entity_embedding.npy"),"wb"),entity_embeddings)
             print("pre-trained graph embeddings are loaded.")
     else:
-        assert os.path.exists(os.path.join(args.data_path,"oov_entity2id.pkl")), "run process.slurm first."
-        oov_entity2id = pickle.load(open(os.path.join(args.data_path,"oov_entity2id.pkl"),"rb"))
-        oov_entity_embeddings = np.load(os.path.join(args.data_path,"oov_entity_embedding.npy"))
+        fn = args.input_filename.split('.')[0]
+        assert os.path.exists(os.path.join(args.tmp_path,f"oov_entity2id_{fn}.pkl")), "run process.slurm first."
+        oov_entity2id = pickle.load(open(os.path.join(args.tmp_path,f"oov_entity2id_{fn}.pkl"),"rb"))
+        oov_entity_embeddings = np.load(os.path.join(args.tmp_path,f"oov_entity_embedding_{fn}.npy"))
         if len(oov_entity2id) == 0:
             print("no out-of-vocabulary entities.")
         else:
@@ -45,12 +46,14 @@ def load_pretrained_embeddings(args):
                     oov_entity_embeddings[oov_entity2id[entity]] = pretrained_embeddings[pretrained_entity2id[entity]]
             print(f"{num_iv_oov_entities} / {len(oov_entity2id)} out-of-vocabulary entities exist in the knowledge base.")
             if num_iv_oov_entities != 0:
-                np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
+                np.save(open(os.path.join(args.tmp_path,f"oov_entity_embedding_{fn}.npy"),"wb"),oov_entity_embeddings)
                 print("pre-trained graph embeddings are loaded.")
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Load pre-trained RotatE embeddings to entity embedding matrix used for training.")
     parser.add_argument("--data_path",type=str,help="path to input csv files. Output will also be saved in the given path.")
+    parser.add_argument("--input_filename",type=str)
+    parser.add_argument("--tmp_path",type=str,default="./tmp/")
     parser.add_argument("--inference_only",action="store_true",help="set this in case of inference only.")
     args = parser.parse_args()
     load_pretrained_embeddings(args)
