@@ -4,7 +4,7 @@ Data processing consists of two steps: preparation of text files and preparation
 
 #### ${\color{green}Prepare \ text \ files}$
 
-🔴 Prepare csv files containing the following columns (refer to /data/test.csv as an example):
+🔴 Prepare csv files containing the following columns (refer to /data/bbrel/test.csv as an example):
 
 - "sentence": the full sentence with candidate entities marked by entity markers: "@@" before and after the subject entity; "$$" for the object entity; "¢¢" for the case where text spans of the subject and object entity overlap.
 - "label": label ids (❗null relation should be labeled by 0).
