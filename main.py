@@ -21,7 +21,7 @@ from preprocessing.utils import model_download_shortcuts
 logger = logging.getLogger(__name__)
 
 def one_hot(vec,num_labels):
-    res = np.zeros((len(vec),num_labels),dtype=np.int)
+    res = np.zeros((len(vec),num_labels),dtype=int)
     for i, v in enumerate(vec):
         res[i,v] = 1
     return res
