@@ -51,11 +51,11 @@ gdown --folder https://drive.google.com/drive/folders/1kVoBsKMBQ3ghTalfirP9uxjYZ
 ```
 3. Generate data (without pre-trained KG embeddings; otherwise set the last parameter to true)
 ```
-sbatch process.slurm {corpus_name} true false
+sbatch process.slurm {corpus_name} true false {file_name}
 ```
 4. Inference using a chosen model. Note that checkpoint weights should be saved under /checkpoint_path/model/
 ```
-sbatch inference.slurm {corpus_name} {checkpoint_path} {no_kb / with_kb}
+sbatch inference.slurm {corpus_name} {file_name} {checkpoint_path} {no_kb / with_kb}
 ``` 
 
 ### Input
