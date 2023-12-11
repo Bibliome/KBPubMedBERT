@@ -8,8 +8,8 @@
 #SBATCH --partition=all
 
 corpus=$1
-ckpt=$2
-mode=$3
+filename=$2
+ckpt=$3
+mode=$4
 
-srun python3 main.py --data_path ./data/$corpus --corpus_name $corpus --mode $mode --checkpoint_path $ckpt --inference_only
-
+srun python3 main.py --data_path ./data/$corpus --input_filename $filename --corpus_name $corpus --mode $mode --checkpoint_path $ckpt --inference_only
