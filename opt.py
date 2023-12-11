@@ -18,7 +18,8 @@ def get_args():
                               "is given, the checkpoint path will by default be set to corpus_mode_bertName_learningRate_seed")
      group.add_argument("--model_type",default="pubmedbert",type=str,
                          help="abbreviation of model to use")
-     group.add_argument("--model_path",default="./models"/,type=str)
+     group.add_argument("--model_path",default="./models/",type=str)
+     group.add_argument("--logging_path",default="./logging/",type=str)
      group.add_argument("--pretrained_model_path", default="./pretrained_models/", type=str,
                          help="Path to pre-trained model or shortcut name")
      group.add_argument("--force_cpu",action="store_true",

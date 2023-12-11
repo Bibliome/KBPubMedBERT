@@ -285,7 +285,7 @@ def main():
 	    
     # in case of inference only, we need to extend entity embeddings of the pre-trained model to accomodate entities that are not seen in training.
     if args.inference_only and args.mode == "with_kb":
-	fn = args.input_filename.split('.')[0]
+        fn = args.input_filename.split('.')[0]
         oov_entity_embs = np.load(os.path.join(args.tmp_path,f"oov_entity_embedding_{fn}.npy"))
         if len(oov_entity_embs) != 0:
             model.entity_embs.weight.data = torch.FloatTensor(np.vstack((model.entity_embs.weight.data.numpy(),oov_entity_embs)))	
