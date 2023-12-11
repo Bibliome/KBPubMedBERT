@@ -19,7 +19,7 @@ Injection of knowledge graph embedding (RotatE) into BERT for biomedical Relatio
 
 ### Installation
 ```
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 ### Quick Start
