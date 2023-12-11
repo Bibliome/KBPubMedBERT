@@ -6,15 +6,11 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from transformers import AutoTokenizer
+from utils import model_download_shortcuts
 
 # emb_range is a parameter used to initialize RotatE embeddings, emb_dim is the embedding dimension, DO NOT change them.
 emb_range = 0.13
 emb_dim = 400
-
-model_download_shortcuts = {"bert":"bert-base-uncased",
-                            "biobert":"dmis-lab/biobert-base-cased-v1.1",
-                            "scibert":"allenai/scibert_scivocab_uncased",
-                            "pubmedbert":"microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract"}
 
 def csv2pickle(args,df,entity2id):
     tokenizer = AutoTokenizer.from_pretrained(model_download_shortcuts[args.model_type])
@@ -61,7 +57,6 @@ def process(args,df,entity2id):
             ix += 1
         np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
         pickle.dump(oov_entity2id,open(os.path.join(args.data_path,"oov_entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
-        #pickle.dump(entity2id,open(os.path.join(args.data_path,"entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
         fp = csv2pickle(args,df,entity2id)
         return fp
     else:
@@ -71,6 +66,7 @@ def process(args,df,entity2id):
 if __name__ == "__main__":
     parser = ArgumentParser(description="convert csv files to pickle files readable by KB-BERT.")
     parser.add_argument("--data_path",type=str,help="path to input csv files. Output will also be saved in the given path.")
+    parser.add_argument("--input_filename",type=str,help="input filename. Set this only when --inference_only is set.")
     parser.add_argument("--model_type",type=str,default="pubmedbert",help="bert model name. Used to choose bert tokenizer.")
     parser.add_argument("--do_not_overwrite_entity_embedding",action="store_true",help="for test purpose only. Do not set in practice.")
     parser.add_argument("--inference_only",action="store_true",help="set this if you generate only files for inference.")
@@ -78,10 +74,11 @@ if __name__ == "__main__":
     
     if args.inference_only:
         # in case of inference only, use existing entity2id
-        df_test = pd.read_csv(os.path.join(args.data_path,"test.csv"))
+        df_test = pd.read_csv(os.path.join(args.data_path,args.input_filename))
         entity2id = pickle.load(open(os.path.join(args.data_path,"entity2id.pkl"),"rb"))
         fp_test = process(args,df_test,entity2id)
-        with open(os.path.join(args.data_path,"test.pkl"),"wb") as f:
+        fn = args.input_filename.split('.')[0]
+        with open(os.path.join(args.data_path,f"{fn}.pkl"),"wb") as f:
             pickle.dump(fp_test,f,pickle.HIGHEST_PROTOCOL)
     else:
         df_train = pd.read_csv(os.path.join(args.data_path,"train.csv"))
