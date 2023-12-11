@@ -48,15 +48,15 @@ def process(args,df,entity2id):
         nn.init.uniform_(tensor=embs,a=-emb_range,b=emb_range)
         oov_entity_embeddings = embs.cpu().numpy()
         oov_entity2id = {}
-
+        fn = args.input_filename.split('.')[0]
         ix = 0
         for entity in oov_entities:
             max_id += 1
             entity2id[entity] = max_id
             oov_entity2id[entity] = ix
             ix += 1
-        np.save(open(os.path.join(args.data_path,"oov_entity_embedding.npy"),"wb"),oov_entity_embeddings)
-        pickle.dump(oov_entity2id,open(os.path.join(args.data_path,"oov_entity2id.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
+        np.save(open(os.path.join(args.tmp_path,f"oov_entity_embedding_{fn}.npy"),"wb"),oov_entity_embeddings)
+        pickle.dump(oov_entity2id,open(os.path.join(args.tmp_path,f"oov_entity2id_{fn}.pkl"),"wb"),pickle.HIGHEST_PROTOCOL)
         fp = csv2pickle(args,df,entity2id)
         return fp
     else:
@@ -66,11 +66,15 @@ def process(args,df,entity2id):
 if __name__ == "__main__":
     parser = ArgumentParser(description="convert csv files to pickle files readable by KB-BERT.")
     parser.add_argument("--data_path",type=str,help="path to input csv files. Output will also be saved in the given path.")
+    parser.add_argument("--tmp_path",type=str,default="./tmp/")
     parser.add_argument("--input_filename",type=str,help="input filename. Set this only when --inference_only is set.")
     parser.add_argument("--model_type",type=str,default="pubmedbert",help="bert model name. Used to choose bert tokenizer.")
     parser.add_argument("--do_not_overwrite_entity_embedding",action="store_true",help="for test purpose only. Do not set in practice.")
     parser.add_argument("--inference_only",action="store_true",help="set this if you generate only files for inference.")
     args = parser.parse_args()
+
+    if not os.path.exists(args.tmp_path):
+        os.makedirs(args.tmp_path)
     
     if args.inference_only:
         # in case of inference only, use existing entity2id
